@@ -26,4 +26,18 @@ public class Lotto {
         }
         this.lottoTicket = lottoTicket;
     }
+
+    public boolean contains(LottoNumber number) {
+        return lottoTicket.contains(number);
+    }
+
+    public int match(Lotto userLotto) {
+        int count = 0;
+        for (LottoNumber number : lottoTicket) {
+            if (userLotto.contains(number)) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
