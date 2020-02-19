@@ -8,15 +8,22 @@ package com.adaline.Lotto.domain;
  * @since 20.02.16
  */
 public class Profits {
+    private static final int MIN_EARNINGS = 0;
+    private static final int MIN_FORMAT = 3;
+
     private final Money money;
     private final long earnings;
 
     public Profits(Money money, long earnings) {
-        if (earnings < 0) {
-            throw new RuntimeException("이익 액수가 마이너스일 수는 없습니다.");
-        }
+        validateMinEarnings(earnings);
         this.money = money;
         this.earnings = earnings;
+    }
+
+    private void validateMinEarnings(long earnings) {
+        if (earnings < MIN_EARNINGS) {
+            throw new RuntimeException("이익 액수가 마이너스일 수는 없습니다.");
+        }
     }
 
     public double calculateEarningRate() {
@@ -25,6 +32,8 @@ public class Profits {
     }
 
     private double format(double earningRate) {
-        return (Math.round(earningRate * 1000)) / 1000.0;
+        return Double.parseDouble(
+                String.format("%10." + MIN_FORMAT + "f"
+                        , earningRate));
     }
 }
