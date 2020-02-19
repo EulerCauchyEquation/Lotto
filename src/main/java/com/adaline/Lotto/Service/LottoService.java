@@ -18,6 +18,7 @@ public class LottoService {
     private static final int LOTTO_NUM_MIN = 1;
     private static final int LOTTO_NUM_MAX = 45;
     private static final int LOTTO_NUM_SIZE = 6;
+    private static final Random random = new Random();
 
     public Lottos buyLottos(Money money) {
         List<Lotto> lottoList = new ArrayList<>();
@@ -33,17 +34,19 @@ public class LottoService {
 
     private List<LottoNumber> createNonDuplicate() {
         Set<LottoNumber> nonDuplicateLotto = new HashSet<>();
-
         while (nonDuplicateLotto.size() < LOTTO_NUM_SIZE) {
             nonDuplicateLotto.add(createNumber());
         }
-        List<LottoNumber> sortedLotto = new ArrayList<>(nonDuplicateLotto);
-        Collections.sort(sortedLotto);
-        return sortedLotto;
+        return sortingLotto(nonDuplicateLotto);
+    }
+
+    private List<LottoNumber> sortingLotto(Set<LottoNumber> nonDuplicateLotto) {
+        List<LottoNumber> sortingLotto = new ArrayList<>(nonDuplicateLotto);
+        Collections.sort(sortingLotto);
+        return sortingLotto;
     }
 
     private LottoNumber createNumber() {
-        Random random = new Random();
         int number = random.nextInt(LOTTO_NUM_MAX - LOTTO_NUM_MIN + 1) +
                 LOTTO_NUM_MIN;
         return new LottoNumber(number);
