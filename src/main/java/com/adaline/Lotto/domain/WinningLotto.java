@@ -12,11 +12,15 @@ public class WinningLotto {
     private final LottoNumber bonusNo;
 
     public WinningLotto(Lotto winningLotto, LottoNumber bonusNo) {
+        validateDuplicateBonusNo(winningLotto, bonusNo);
+        this.winningLotto = winningLotto;
+        this.bonusNo = bonusNo;
+    }
+
+    private void validateDuplicateBonusNo(Lotto winningLotto, LottoNumber bonusNo) {
         if (winningLotto.contains(bonusNo)) {
             throw new RuntimeException("보너스 볼은 당첨번호들과 중복되면 안 됩니다.");
         }
-        this.winningLotto = winningLotto;
-        this.bonusNo = bonusNo;
     }
 
     public Rank match(Lotto userLotto) {
