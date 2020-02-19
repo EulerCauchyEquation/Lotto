@@ -4,6 +4,7 @@ import com.adaline.Lotto.domain.*;
 
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * 당첨지 서비스 클래스
@@ -85,11 +86,10 @@ public class WinningLottoService {
     }
 
     public LottoResult matchWinningLotto(Lottos userLottos, WinningLotto winningLotto) {
-        List<Rank> resultList = new ArrayList<>();
-        for (Lotto lotto : userLottos.getLottos()) {
-            Rank rank = winningLotto.match(lotto);
-            resultList.add(rank);
-        }
+        List<Rank> resultList = userLottos.getLottos()
+                .stream()
+                .map(winningLotto::match)
+                .collect(Collectors.toList());
         return new LottoResult(resultList);
     }
 }
