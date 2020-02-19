@@ -24,10 +24,6 @@ public class MoneyService {
         return createMoneyUtil();
     }
 
-    private String inputString() {
-        return scanner.nextLine();
-    }
-
     private Money createMoneyUtil() {
         String input = inputString();
         if (input.isEmpty()) {
@@ -54,6 +50,10 @@ public class MoneyService {
             return createMoneyUtil();
         }
         return new Money(refinedNumber);
+    }
+
+    private String inputString() {
+        return scanner.nextLine();
     }
 
     private long toLong(String input) {
