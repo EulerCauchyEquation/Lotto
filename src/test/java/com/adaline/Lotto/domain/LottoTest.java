@@ -87,5 +87,4 @@ public class LottoTest {
         ));
         Assert.assertThat(3, is(lotto.match(otherLotto)));
     }
-
 }

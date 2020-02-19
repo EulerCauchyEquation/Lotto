@@ -17,14 +17,22 @@ public class Lotto {
     private final List<LottoNumber> lottoTicket;
 
     public Lotto(List<LottoNumber> lottoTicket) {
+        validateLottoSize(lottoTicket);
+        validateDuplicate(lottoTicket);
+        this.lottoTicket = lottoTicket;
+    }
+
+    private void validateLottoSize(List<LottoNumber> lottoTicket) {
         if (lottoTicket.size() != LOTTO_NUM_SIZE) {
             throw new RuntimeException("로또 번호는 총 6개이어야 합니다.");
         }
+    }
+
+    private void validateDuplicate(List<LottoNumber> lottoTicket) {
         Set<LottoNumber> nonDuplicateLottoTicket = new HashSet<>(lottoTicket);
         if (nonDuplicateLottoTicket.size() < LOTTO_NUM_SIZE) {
             throw new RuntimeException("로또티켓의 번호가 중복이 되면 안 됩니다.");
         }
-        this.lottoTicket = lottoTicket;
     }
 
     public boolean contains(LottoNumber number) {
@@ -32,12 +40,8 @@ public class Lotto {
     }
 
     public int match(Lotto userLotto) {
-        int count = 0;
-        for (LottoNumber number : lottoTicket) {
-            if (userLotto.contains(number)) {
-                count++;
-            }
-        }
-        return count;
+        return (int) lottoTicket.stream()
+                .filter(userLotto::contains)
+                .count();
     }
 }
