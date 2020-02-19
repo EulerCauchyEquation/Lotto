@@ -19,12 +19,13 @@ public class LottoResult {
         }
     }
 
-    public Long totalPrizeMoney() {
-        long sum = 0;
-        for (Rank rank : result.keySet()) {
-            int count = result.get(rank);
-            sum += rank.getWinningMoney() * count;
-        }
-        return sum;
+    public long totalPrizeMoney() {
+        return result.keySet()
+                .stream()
+                .mapToLong(rank -> {
+                    int count = result.get(rank);
+                    return rank.getWinningMoney() * count;
+                })
+                .sum();
     }
 }
