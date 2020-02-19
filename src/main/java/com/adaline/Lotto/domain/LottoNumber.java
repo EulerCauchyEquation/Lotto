@@ -9,7 +9,7 @@ import java.util.Objects;
  * @version 1.0
  * @since 20.02.14
  */
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int LOTTO_NUM_MIN = 1;
     private static final int LOTTO_NUM_MAX = 45;
 
@@ -37,5 +37,10 @@ public class LottoNumber {
         }
         LottoNumber other = (LottoNumber) obj;
         return lottoNumber == other.lottoNumber;
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return lottoNumber - other.lottoNumber;
     }
 }
