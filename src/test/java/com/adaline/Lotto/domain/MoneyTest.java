@@ -15,11 +15,6 @@ import static org.hamcrest.CoreMatchers.is;
 public class MoneyTest {
 
     @Test(expected = RuntimeException.class)
-    public void 돈_음수() {
-        new Money(-100);
-    }
-
-    @Test(expected = RuntimeException.class)
     public void 돈_로또한장_가격_이하() {
         new Money(900);
     }
