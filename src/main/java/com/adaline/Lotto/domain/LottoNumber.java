@@ -16,10 +16,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
+        validateNumberRange(lottoNumber);
+        this.lottoNumber = lottoNumber;
+    }
+
+    private void validateNumberRange(int lottoNumber) {
         if (lottoNumber < LOTTO_NUM_MIN || lottoNumber > LOTTO_NUM_MAX) {
             throw new RuntimeException("로또 번호가 범위에서 벗어납니다.");
         }
-        this.lottoNumber = lottoNumber;
     }
 
     @Override
